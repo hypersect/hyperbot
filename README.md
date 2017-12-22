@@ -9,8 +9,8 @@ Hyperbot is a Discord bot developed for the [INVERSUS](http://www.inversusgame.c
  	* Ask for a list of all leaderboards.
  	* Ask for active player count.
  	* Register/unregister your Steam profile with your Discord. This allows for the following commands:
- 		* Post a Steam invitation link to your in-game lobby.
- 	* Request the latest Steam community item text be posted (currently admin only)
+ 		* Post a Steam invitation link to your in-game lobby. This requires your Steam lobbies to be properly integrated for Steam invitations (i.e. the Join Game button on user profiles works).
+ 	* Request the latest Steam community news item text be posted (currently admin only)
 * **Challonge**
 	* Tournament moderators can register an active tournament.
 	* Tournament moderators can assign a winner on tournament completion. The latest winner is awarded a special Discord role.
