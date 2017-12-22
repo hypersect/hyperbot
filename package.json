@@ -1,0 +1,23 @@
+{
+  "name": "hyperbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "enmap": "^0.4.1",
+    "enmap-level": "^1.0.0",
+    "fast-levenshtein": "^2.0.6",
+    "request": "^2.82.0",
+    "request-promise": "^4.2.2",
+    "xml2js": "^0.4.19",
+    "xml2js-es6-promise": "^1.1.1"
+  },
+  "devDependencies": {},
+  "description": ""
+}
