@@ -1,0 +1,2 @@
+# hyperbot
+Hypersect Discord Bot
