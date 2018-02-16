@@ -36,9 +36,19 @@ exports.run  = async (bot, client, message, args, content) =>
 	
 		// set the new tournament and message
 		{
+			var groupName = "Contestants";
+			
+			var groupRoleName = bot.config.roles["tournament_group"];
+			if (groupRoleName)
+			{
+				var groupRole = message.guild.roles.find("name", groupRoleName);
+				if (groupRole)
+					groupName = groupRole.toString()
+			}
+			
 			var activeTournament = args[0];
 			bot.tournament.set("active", activeTournament);
-			var replyMessage = await tournamentChannel.send("A new tournament has begun! You can view it at: " + activeTournament);
+			var replyMessage = await tournamentChannel.send(groupName + ", a new tournament has begun! You can view it at: " + activeTournament);
 			bot.tournament.set("message", replyMessage.id);
 			replyMessage.pin();
 		}

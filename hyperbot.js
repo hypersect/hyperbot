@@ -79,10 +79,21 @@ async function CompareHighScores(client)
         var curLeaderboard = leaderboardList.leaderboard[leaderboardIdx];
 
         var leaderboardXml = await rp(curLeaderboard.url + '&start=1&end=1');
+		if (!leaderboardXml)
+		{
+			console.log("Failed to get leaderboard xml for " + curLeaderboard.display_name);
+			continue;
+		}
+		
         var leaderboard = await xml2js(leaderboardXml, {explicitArray : false, async: false})
-        
+		if (!leaderboard || !leaderboard.response || !leaderboard.response.entries || !leaderboard.response.entries.entry)
+		{
+			console.log("Unexpected leaderboard js for " + curLeaderboard.display_name);
+			continue;
+		}
+
         var newEntry = leaderboard.response.entries.entry;
-        if (newEntry)
+	    if (newEntry)
         {
             var newScore = newEntry.score;
             var oldScore = bot.highScores.get(curLeaderboard.lbid);

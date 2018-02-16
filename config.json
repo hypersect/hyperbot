@@ -7,11 +7,13 @@
   "tournament_channel": "123456789123456789",
   "roles":
   {
+	  "tournament_group":  "Tournaments",
 	  "tournament_admin":  "Mods",
 	  "tournament_winner": "Champion"
   },
   "subscriptions":
   [
+	"Tournaments",
     "LFG PS4",
     "LFG Steam",
     "LFG Switch",
