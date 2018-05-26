@@ -7,7 +7,9 @@ exports.help = "Begin a new tournament.";
 exports.run  = async (bot, client, message, args, content) =>
 {
 	// validate that the url is in the appropriate form
-	if (args.length != 1 || !args[0].startsWith("http://challonge.com/"))
+	if (args.length != 1 ||
+		(!args[0].startsWith("http://challonge.com/") &&
+		 !args[0].startsWith("https://challonge.com/")))
 	{
         return message.reply("please specify a full Challonge tournament  URL after the command (including the http).");
     }

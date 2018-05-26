@@ -25,6 +25,6 @@ exports.run = async (bot, client, message, args, content) =>
     }
     else
     {
-        message.reply("failed to find an open private lobby for others to join");
+        message.reply("Failed to find an open private lobby for others to join. Is your Steam profile private?");
     }
 }

@@ -17,8 +17,10 @@ exports.run = async (bot, client, message, args, content) =>
 	{
 		// validate that the url is in the appropriate form
 		if (args.length != 1 ||
-			(!args[0].startsWith("http://steamcommunity.com/profiles") &&
-			 !args[0].startsWith("http://steamcommunity.com/id")))
+			(!args[0].startsWith("http://steamcommunity.com/profiles/") &&
+			 !args[0].startsWith("https://steamcommunity.com/profiles/") &&
+			 !args[0].startsWith("http://steamcommunity.com/id/") &&
+			 !args[0].startsWith("https://steamcommunity.com/id/")))
 		{
 			return message.reply("as an administrator, you must specify a full Steam profile URL after the command (including the http).");
 		}
