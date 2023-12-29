@@ -191,7 +191,7 @@ client.on("ready", () =>
 //*****************************************************************************
 // The bot has read a new message
 //*****************************************************************************
-client.on("message", async (message) =>
+client.on("messageCreate", async (message) =>
 {
 	// ignore messages from other bots (cheap way to prevent accidental feedback loops)
     if (message.author.bot)

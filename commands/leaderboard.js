@@ -78,7 +78,7 @@ exports.run = async (bot, client, message, args, content) =>
 	}
 				
 	// shore the results
-	message.channel.send({embed: {
+	message.channel.send({embeds: [{
 		color: 0xFFFFFF,
 		title: leaderboardListEntry.display_name,
 		url: "http://steamcommunity.com/stats/" + bot.config.steam_appid + "/leaderboards/" + leaderboardListEntry.lbid + "/",
@@ -98,5 +98,5 @@ exports.run = async (bot, client, message, args, content) =>
 			inline: true
 			}
 		],
-	}});
+	}]});
 }
