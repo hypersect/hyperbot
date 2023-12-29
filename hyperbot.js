@@ -4,7 +4,6 @@ const rp = require('request-promise');
 const xml2js = require('xml2js-es6-promise');
 const fs = require("fs");
 const Enmap = require('enmap');
-const EnmapLevel = require('enmap-level');
 const steam = require('./utility/steam');
 
 //===
@@ -18,8 +17,8 @@ bot.secret = require("./secret.json");
 // Create persistant databases used by commands.
 // TODO: drive this by the commands
 // note: the EnmapLevel name corresponds to the file name in the "data" folder
-bot.steamIds   = new Enmap({ provider: new EnmapLevel({ name: 'database_SteamIds' }) });   // steam id registrations per user
-bot.tournament = new Enmap({ provider: new EnmapLevel({ name: 'database_Tournament' }) }); // active tournament data
+bot.steamIds   = new Enmap({ name: 'database_SteamIds' });   // steam id registrations per user
+bot.tournament = new Enmap({ name: 'database_Tournament' }); // active tournament data
 
 // Create list of cached high score values
 // todo: make this persist on disk such that we still report high scores created
