@@ -11,7 +11,7 @@ exports.run  = async (bot, client, message, args, content) =>
 		(!args[0].startsWith("http://challonge.com/") &&
 		 !args[0].startsWith("https://challonge.com/")))
 	{
-        return message.reply("please specify a full Challonge tournament  URL after the command (including the http).");
+        return message.channel.send(`${message.author} please specify a full Challonge tournament  URL after the command (including the http).`);
     }
 
 	var tournamentChannel = client.channels.get(bot.config.tournament_channel);

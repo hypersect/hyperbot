@@ -9,7 +9,7 @@ exports.run = async (bot, client, message, args, content) =>
 	// validate that the url is in the appropriate form
 	if (args.length != 1 || message.mentions.members.size != 1)
 	{
-        return message.reply("please specify a member that won the tournament.");
+        return message.channel.send(`${message.author} please specify a member that won the tournament.`);
     }
 
 	var tournamentChannel = client.channels.get(bot.config.tournament_channel);

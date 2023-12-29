@@ -10,7 +10,7 @@ exports.run = async (bot, client, message, args, content) =>
 	message.delete();
 
 	if (content.length == 0)
-		return message.reply("Specify a leaderboard name.")
+		return message.channel.send(`${message.author} Specify a leaderboard name.`)
 
 	var searchName = content.toLowerCase();
 
@@ -40,7 +40,7 @@ exports.run = async (bot, client, message, args, content) =>
 	}
 
 	if (!leaderboardListEntry)
-		return message.reply("Did not find leaderboard " + searchName)
+		return message.channel.send(`${message.author} Did not find leaderboard ${searchName}`)
 			
 	var leaderboardXml = await rp(leaderboardListEntry.url + '&start=1&end=10');
 				

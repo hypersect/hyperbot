@@ -11,7 +11,7 @@ exports.run = async (bot, client, message, args, content) =>
 	// get steam id from discord id
     var steamId = bot.steamIds.get("discordId:" + message.author.id);
     if (!steamId)
-        return message.reply("please register your steam profile with the 'register' command before using the 'invite' command.");
+        return message.channel.send(`${message.author} please register your steam profile with the 'register' command before using the 'invite' command.`);
 
 	// load information for steam id
 	var playerIds = [ steamId ];
@@ -25,6 +25,6 @@ exports.run = async (bot, client, message, args, content) =>
     }
     else
     {
-        message.reply("Failed to find an open private lobby for others to join. Is your Steam profile private?");
+        message.channel.send(`${message.author} Failed to find an open private lobby for others to join. Is your Steam profile private?`);
     }
 }

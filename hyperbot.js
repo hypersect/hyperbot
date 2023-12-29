@@ -219,7 +219,7 @@ client.on("messageCreate", async (message) =>
 		// check if this member can run this command
 		if(!bot.MemberCanUseCommand(message.member, command))
 		{
-			message.reply("You do not have permission to use this command.");
+			message.channel.send(`${message.author} You do not have permission to use this command.`);
 		}		
 		else
 		{
@@ -230,7 +230,7 @@ client.on("messageCreate", async (message) =>
 			}
 			catch (err)
 			{
-				message.reply("There was an unexpected error.");
+				message.channel.send(`${message.author} There was an unexpected error.`);
 				console.error(err);
 			}
 		}

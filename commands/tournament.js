@@ -10,10 +10,10 @@ exports.run = (bot, client, message, args, content) =>
 	var active = bot.tournament.get("active");
 	if (active)
 	{
-		message.reply("the active tournament can be viewed at: " + active);
+		message.channel.send(`${message.author} the active tournament can be viewed at: ${active}`);
 	}
 	else
 	{
-		message.reply("there is no active tournament.");
+		message.channel.send(`${message.author} there is no active tournament.`);
 	}
 }

@@ -16,7 +16,7 @@ exports.run = async (bot, client, message, args, content) =>
 
 		if (news.appnews.newsitems.length == 0)
 		{
-			return message.reply("there was no news");
+			return message.channel.send(`${message.author} there was no news`);
 		}
 		
 		var newsItem = news.appnews.newsitems[0];
