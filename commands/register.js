@@ -33,7 +33,7 @@ exports.run = async (bot, client, message, args, content) =>
         if (discordId)
         {
             console.log("Found registered discord id " + discordId);
-            var discordUser = client.users.get(discordId);
+            var discordUser = client.users.cache.get(discordId);
             if (discordUser)
             {
                 return message.channel.send(`${message.author} steam user ${steamName} is already registered to user ${discordUser.toString()}. Please ask an administrator to unregister the SteamID.`);
