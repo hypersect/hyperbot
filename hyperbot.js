@@ -148,13 +148,13 @@ async function CompareHighScores(client)
                     }
 
                     // shore the results
-                    channel.send({embed: {
+                    channel.send({embeds: [{
                         color: 0xFFFFFF,
                         title: curLeaderboard.display_name,
                         url: "http://steamcommunity.com/stats/" + bot.config.steam_appid + "/leaderboards/" + curLeaderboard.lbid + "/",
                         description: "New high score of " + parseInt(newScore).toLocaleString() + " by " + nameData + "!",
                         thumbnail: { url: iconUrl },
-                    }});
+                    }]});
                 }
             }
         }
