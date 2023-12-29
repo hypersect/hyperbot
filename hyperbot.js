@@ -50,13 +50,13 @@ bot.MemberCanUseCommand = function (member, command)
 {
 	if (command.admin)
 	{
-		if (!member.hasPermission(Discord.Permissions.FLAGS.ADMINISTRATOR))
+		if (!member.permissions.has(Discord.PermissionFlagsBits.Administrator))
 			return false;
 	}
 	
 	if (command.role)
 	{
-		if(!member.roles.find("name", this.config.roles[command.role]))
+		if(!member.roles.cache.some(r => r.name === this.config.roles[command.role]))
 			return false;
 	}
 	
