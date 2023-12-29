@@ -13,11 +13,11 @@ exports.run = (bot, client, message, args, content) => {
 		if (subscriptionIndex >= 0)
 		{
 			var roleName = bot.config.subscriptions[subscriptionIndex];
-			var role = message.guild.roles.find("name", roleName);
+			var role = message.guild.roles.cache.find(r => r.name === roleName);
 			if (role)
 			{
 				message.channel.send('Subscribing ' + message.member.toString() + ' to role "' + roleName + '".');
-				message.member.addRole(role);
+				message.member.roles.add(role);
 			}
 			else
 			{

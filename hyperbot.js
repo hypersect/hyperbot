@@ -123,7 +123,7 @@ async function CompareHighScores(client)
 
             if (messageNewScore)
             {
-                var channel = client.channels.get(bot.config.steam_channel);
+                var channel = client.channels.cache.get(bot.config.steam_channel);
                 if (channel)
                 {
                     // query info about new high score hoder

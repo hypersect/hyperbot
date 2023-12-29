@@ -13,11 +13,11 @@ exports.run = (bot, client, message, args, content) => {
 		if (subscriptionIndex >= 0)
 		{
 			var roleName = bot.config.subscriptions[subscriptionIndex];
-			var role = message.guild.roles.find("name", roleName);
+			var role = message.guild.roles.cache.find(r => r.name === roleName);
 			if (role)
 			{
 				message.channel.send('Unsubscribing ' + message.member.toString() + ' from role "' + roleName + '".');
-				message.member.removeRole(role);
+				message.member.roles.remove(role);
 			}
 			else
 			{
