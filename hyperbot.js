@@ -1,5 +1,9 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client = new Discord.Client({ intents: [
+	Discord.GatewayIntentBits.Guilds,
+	Discord.GatewayIntentBits.GuildMessages,
+	Discord.GatewayIntentBits.MessageContent,
+]});
 const rp = require('request-promise');
 const xml2js = require('xml2js-es6-promise');
 const fs = require("fs");
