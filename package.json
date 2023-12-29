@@ -1,7 +1,7 @@
 {
   "name": "hyperbot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "hyperbot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,9 +12,8 @@
     "aws4": "^1.7.0",
     "bluebird": "^3.5.1",
     "combined-stream": "^1.0.6",
-    "discord.js": "^11.3.2",
-    "enmap": "^0.4.6",
-    "enmap-level": "^1.0.1",
+    "discord.js": "^14.14.1",
+    "enmap": "5.9.8",
     "fast-levenshtein": "^2.0.6",
     "form-data": "^2.3.2",
     "hoek": "^5.0.3",
