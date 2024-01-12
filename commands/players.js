@@ -18,8 +18,8 @@ exports.run = async (bot, client, message, args, content) =>
 
 		var playerCount = players.response.player_count;
 		
-		message.reply("the current number of players in game on Steam is " + playerCount + ".");
-					
+
+		message.channel.send(`${message.author} the current number of players in game on Steam is ${playerCount}.`); 
 	} catch (e) {
 		console.error(e);
 	}

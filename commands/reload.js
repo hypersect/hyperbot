@@ -3,7 +3,7 @@ exports.help = "Reloads the script for a given a command";
 exports.run = async (bot, client, message, args, content) =>
 {
    if(!args || args.length != 1)
-		return message.reply("provide a command name to reload.");
+		return message.channel.send(`${message.author} provide a command name to reload.`);
 
     var commandName = args[0];
 
@@ -19,7 +19,7 @@ exports.run = async (bot, client, message, args, content) =>
 		// load in the new command
 		bot.commands.set(commandName, require(`../commands/${commandName}.js`));
 		message.delete();
-		message.reply(`the command ${commandName} has been reloaded`);
+		message.channel.send(`${message.author} the command ${commandName} has been reloaded`);
 	}
 	catch (err)
 	{

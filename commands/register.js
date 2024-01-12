@@ -12,7 +12,7 @@ exports.run = async (bot, client, message, args, content) =>
          !args[0].startsWith("http://steamcommunity.com/id/") &&
          !args[0].startsWith("https://steamcommunity.com/id/")))
 	{
-        return message.reply("please specify a full Steam profile URL after the command (including the http).");
+        return message.channel.send(`${message.author} please specify a full Steam profile URL after the command (including the http).`);
     }
 
     // load information about the steam user
@@ -33,10 +33,10 @@ exports.run = async (bot, client, message, args, content) =>
         if (discordId)
         {
             console.log("Found registered discord id " + discordId);
-            var discordUser = client.users.get(discordId);
+            var discordUser = client.users.cache.get(discordId);
             if (discordUser)
             {
-                return message.reply("steam user " + steamName + " is already registered to user " + discordUser.toString() + ". Please ask an administrator to unregister the SteamID.");
+                return message.channel.send(`${message.author} steam user ${steamName} is already registered to user ${discordUser.toString()}. Please ask an administrator to unregister the SteamID.`);
             }
         }
 
@@ -56,7 +56,7 @@ exports.run = async (bot, client, message, args, content) =>
     }
     catch (e)
     {
-        message.reply("Failed to register Steam user.");
+        message.channel.send(`${message.author} Failed to register Steam user.`);
         console.error(e);
     }
 }

@@ -11,10 +11,10 @@ exports.run  = async (bot, client, message, args, content) =>
 		(!args[0].startsWith("http://challonge.com/") &&
 		 !args[0].startsWith("https://challonge.com/")))
 	{
-        return message.reply("please specify a full Challonge tournament  URL after the command (including the http).");
+        return message.channel.send(`${message.author} please specify a full Challonge tournament  URL after the command (including the http).`);
     }
 
-	var tournamentChannel = client.channels.get(bot.config.tournament_channel);
+	var tournamentChannel = client.channels.cache.get(bot.config.tournament_channel);
 	if (tournamentChannel)
 	{
 		// unpin the old tournament message
@@ -23,7 +23,7 @@ exports.run  = async (bot, client, message, args, content) =>
 		{
 			try
 			{
-				var pinnedMessage = await tournamentChannel.fetchMessage(messageId);
+				var pinnedMessage = await tournamentChannel.messages.fetch(messageId);
 				if (pinnedMessage)
 				{
 					pinnedMessage.unpin();
@@ -43,7 +43,7 @@ exports.run  = async (bot, client, message, args, content) =>
 			var groupRoleName = bot.config.roles["tournament_group"];
 			if (groupRoleName)
 			{
-				var groupRole = message.guild.roles.find("name", groupRoleName);
+				var groupRole = message.guild.roles.cache.find(r => r.name === groupRoleName);
 				if (groupRole)
 					groupName = groupRole.toString()
 			}

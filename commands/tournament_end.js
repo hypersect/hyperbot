@@ -9,14 +9,14 @@ exports.run = async (bot, client, message, args, content) =>
 	// validate that the url is in the appropriate form
 	if (args.length != 1 || message.mentions.members.size != 1)
 	{
-        return message.reply("please specify a member that won the tournament.");
+        return message.channel.send(`${message.author} please specify a member that won the tournament.`);
     }
 
-	var tournamentChannel = client.channels.get(bot.config.tournament_channel);
+	var tournamentChannel = client.channels.cache.get(bot.config.tournament_channel);
 	if (tournamentChannel)
 	{
 		var winnerMember = message.mentions.members.first();
-		var winnerRole = message.guild.roles.find("name", bot.config.roles["tournament_winner"]);
+		var winnerRole = message.guild.roles.cache.find(r => r.name ===  bot.config.roles["tournament_winner"]);
 		
 		// unpin the old tournament message
 		var messageId = bot.tournament.get("message");
@@ -24,7 +24,7 @@ exports.run = async (bot, client, message, args, content) =>
 		{
 			try
 			{
-				var pinnedMessage = await tournamentChannel.fetchMessage(messageId);
+				var pinnedMessage = await tournamentChannel.messages.fetch(messageId);
 				if (pinnedMessage)
 				{
 					pinnedMessage.unpin();
@@ -38,15 +38,15 @@ exports.run = async (bot, client, message, args, content) =>
 		}
 		
 		// remove winner role from all members
-		winnerRole.members.forEach(member => {
+		winnerRole.members.each(member => {
 			if (member.id != winnerMember.id)
 			{
-				 member.removeRole(winnerRole);
+				member.roles.remove(winnerRole);
 			}
 		});
 		
 		// add winner role to the winner
-		winnerMember.addRole(winnerRole);
+		winnerMember.roles.add(winnerRole);
 
 		var activeTournament = args[0];
 		bot.tournament.set("active", undefined);

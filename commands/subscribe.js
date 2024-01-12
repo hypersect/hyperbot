@@ -13,15 +13,15 @@ exports.run = (bot, client, message, args, content) => {
 		if (subscriptionIndex >= 0)
 		{
 			var roleName = bot.config.subscriptions[subscriptionIndex];
-			var role = message.guild.roles.find("name", roleName);
+			var role = message.guild.roles.cache.find(r => r.name === roleName);
 			if (role)
 			{
 				message.channel.send('Subscribing ' + message.member.toString() + ' to role "' + roleName + '".');
-				message.member.addRole(role);
+				message.member.roles.add(role);
 			}
 			else
 			{
-				message.reply('there was an unexpected error. Does role "' + roleName + '" not exist on the server?');
+				message.channel.send(`${message.author} there was an unexpected error. Does role "${roleName} " not exist on the server?`);
 			}
 		}
 		else
@@ -29,7 +29,7 @@ exports.run = (bot, client, message, args, content) => {
 			var subscriptions = "";
 			bot.config.subscriptions.forEach(subscription => { subscriptions += "    " + subscription + "\n"; });
 
-			message.reply('"' + content + '" is not a valid role. Please choose from:\n' + subscriptions);
+			message.channel.send(`${message.author} "${content}" is not a valid role. Please choose from:\n${subscriptions}`);
 		}
 	}
 	else
@@ -39,6 +39,6 @@ exports.run = (bot, client, message, args, content) => {
 		var subscriptions = "";
 		bot.config.subscriptions.forEach(subscription => { subscriptions += "    " + subscription + "\n"; });
 
-		message.reply("please specify a role to subscribe to:\n" + subscriptions);
+		message.channel.send(`${message.author} please specify a role to subscribe to:\n${subscriptions}`);
 	}
 }

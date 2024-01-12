@@ -1,10 +1,13 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client = new Discord.Client({ intents: [
+	Discord.GatewayIntentBits.Guilds,
+	Discord.GatewayIntentBits.GuildMessages,
+	Discord.GatewayIntentBits.MessageContent,
+]});
 const rp = require('request-promise');
 const xml2js = require('xml2js-es6-promise');
 const fs = require("fs");
 const Enmap = require('enmap');
-const EnmapLevel = require('enmap-level');
 const steam = require('./utility/steam');
 
 //===
@@ -18,8 +21,8 @@ bot.secret = require("./secret.json");
 // Create persistant databases used by commands.
 // TODO: drive this by the commands
 // note: the EnmapLevel name corresponds to the file name in the "data" folder
-bot.steamIds   = new Enmap({ provider: new EnmapLevel({ name: 'database_SteamIds' }) });   // steam id registrations per user
-bot.tournament = new Enmap({ provider: new EnmapLevel({ name: 'database_Tournament' }) }); // active tournament data
+bot.steamIds   = new Enmap({ name: 'database_SteamIds' });   // steam id registrations per user
+bot.tournament = new Enmap({ name: 'database_Tournament' }); // active tournament data
 
 // Create list of cached high score values
 // todo: make this persist on disk such that we still report high scores created
@@ -47,13 +50,13 @@ bot.MemberCanUseCommand = function (member, command)
 {
 	if (command.admin)
 	{
-		if (!member.hasPermission(Discord.Permissions.FLAGS.ADMINISTRATOR))
+		if (!member.permissions.has(Discord.PermissionFlagsBits.Administrator))
 			return false;
 	}
 	
 	if (command.role)
 	{
-		if(!member.roles.find("name", this.config.roles[command.role]))
+		if(!member.roles.cache.some(r => r.name === this.config.roles[command.role]))
 			return false;
 	}
 	
@@ -120,7 +123,7 @@ async function CompareHighScores(client)
 
             if (messageNewScore)
             {
-                var channel = client.channels.get(bot.config.steam_channel);
+                var channel = client.channels.cache.get(bot.config.steam_channel);
                 if (channel)
                 {
                     // query info about new high score hoder
@@ -145,13 +148,13 @@ async function CompareHighScores(client)
                     }
 
                     // shore the results
-                    channel.send({embed: {
+                    channel.send({embeds: [{
                         color: 0xFFFFFF,
                         title: curLeaderboard.display_name,
                         url: "http://steamcommunity.com/stats/" + bot.config.steam_appid + "/leaderboards/" + curLeaderboard.lbid + "/",
                         description: "New high score of " + parseInt(newScore).toLocaleString() + " by " + nameData + "!",
                         thumbnail: { url: iconUrl },
-                    }});
+                    }]});
                 }
             }
         }
@@ -188,7 +191,7 @@ client.on("ready", () =>
 //*****************************************************************************
 // The bot has read a new message
 //*****************************************************************************
-client.on("message", async (message) =>
+client.on("messageCreate", async (message) =>
 {
 	// ignore messages from other bots (cheap way to prevent accidental feedback loops)
     if (message.author.bot)
@@ -216,7 +219,7 @@ client.on("message", async (message) =>
 		// check if this member can run this command
 		if(!bot.MemberCanUseCommand(message.member, command))
 		{
-			message.reply("You do not have permission to use this command.");
+			message.channel.send(`${message.author} You do not have permission to use this command.`);
 		}		
 		else
 		{
@@ -227,7 +230,7 @@ client.on("message", async (message) =>
 			}
 			catch (err)
 			{
-				message.reply("There was an unexpected error.");
+				message.channel.send(`${message.author} There was an unexpected error.`);
 				console.error(err);
 			}
 		}

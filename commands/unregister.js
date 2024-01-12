@@ -22,7 +22,7 @@ exports.run = async (bot, client, message, args, content) =>
 			 !args[0].startsWith("http://steamcommunity.com/id/") &&
 			 !args[0].startsWith("https://steamcommunity.com/id/")))
 		{
-			return message.reply("as an administrator, you must specify a full Steam profile URL after the command (including the http).");
+			return message.channel.send(`${message.author} as an administrator, you must specify a full Steam profile URL after the command (including the http).`);
 		}
 		else
 		{
@@ -49,5 +49,5 @@ exports.run = async (bot, client, message, args, content) =>
 	if (discordId)
 		bot.steamIds.delete("discordId:" + discordId);
 
-    message.reply("unregistered all associated accounts");
+    message.channel.send(`${message.author} unregistered all associated accounts`);
 }

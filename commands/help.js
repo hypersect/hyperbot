@@ -24,5 +24,5 @@ exports.run = async (bot, client, message, args, content) =>
     
 	// delete the request message and post the response
 	message.delete();
-    message.reply(msgText); 
+    message.channel.send(`${message.author} ${msgText}`); 
 }

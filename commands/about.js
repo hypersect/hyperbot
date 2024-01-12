@@ -2,7 +2,7 @@ exports.admin = false;
 exports.help = "Information about this bot.";
 exports.run = (bot, client, message, args, content) =>
 {
-	message.channel.send({embed: {
+	message.channel.send({embeds: [{
 		color: 0xFFFFFF,
 		title: "Hyperbot",
 		url: "https://github.com/hypersect/hyperbot/",
@@ -12,5 +12,5 @@ exports.run = (bot, client, message, args, content) =>
 			value: "[Hypersect](http://www.hypersect.com), [INVERSUS](http://www.inversusgame.com), [Hyperbot](https://github.com/hypersect/hyperbot/)",
 			inline: true
 		}]
-	}});
+	}]});
 }

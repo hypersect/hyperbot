@@ -16,7 +16,7 @@ exports.run = async (bot, client, message, args, content) =>
 
 		if (news.appnews.newsitems.length == 0)
 		{
-			return message.reply("there was no news");
+			return message.channel.send(`${message.author} there was no news`);
 		}
 		
 		var newsItem = news.appnews.newsitems[0];
@@ -46,12 +46,12 @@ exports.run = async (bot, client, message, args, content) =>
 
 		content = content.replace(/\[\*\]/g, "* ");
 				
-		message.channel.send({embed: {
+		message.channel.send({embeds: [{
 			color: 0xFFFFFF,
 			title: newsItem.title,
 			url: newsItem.url,
 			description: content.substr(0,2000) // clip string to max limit supported by discord
-		}});
+		}]});
 					
 	} catch (e) {
 		console.error(e);
